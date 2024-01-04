@@ -1,6 +1,6 @@
 NAME = a.out
-SOURCES = main.cpp Animal.cpp Dog.cpp
-INCLUDES = Animal.hpp Dog.hpp
+SOURCES = main.cpp WrongAnimal.cpp WrongCat.cpp
+INCLUDES = WrongAnimal.hpp WrongCat.hpp
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SOURCES:.cpp=.o))
 SRCS = $(addprefix $(SRC_DIR)/, $(SOURCES))
