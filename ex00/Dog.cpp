@@ -19,7 +19,7 @@ Dog::~Dog(void) {
 	std::cout << "Dog Destructor called" << std::endl;
 }
 
-void	Dog::makeSound(void)
+void	Dog::makeSound(void) const
 {
 	std::cout << "멍무엉멍멍" << std::endl;
 }

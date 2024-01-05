@@ -1,6 +1,6 @@
 #include "WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal(void) : type("") {
+WrongAnimal::WrongAnimal(void) : type() {
 	std::cout << "WrongAnimal Default constructor called" << std::endl;
 }
 
@@ -24,9 +24,12 @@ WrongAnimal::WrongAnimal(const std::string& _type) : type(_type) {
 	std::cout << "WrongAnimal String assignment operation called" << std::endl;
 }
 
-void	WrongAnimal::makeSound(void)
+void	WrongAnimal::makeSound(void) const
 {
 	std::cout << "(no sound)" << std::endl;
 }
 
-std::string	WrongAnimal::getType(void) { return (type); }
+std::string	WrongAnimal::getType(void) const
+{
+	return (type);
+}

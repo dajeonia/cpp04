@@ -1,5 +1,5 @@
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 # include <iostream>
 # include "WrongAnimal.hpp"
 
@@ -10,7 +10,7 @@ public:
 	WrongCat& operator=(const WrongCat&);
 	~WrongCat();
 
-	void makeSound(void);
+	void makeSound(void) const;
 };
 
 #endif

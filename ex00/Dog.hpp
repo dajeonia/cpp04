@@ -10,7 +10,7 @@ public:
 	Dog& operator=(const Dog&);
 	~Dog();
 
-	void makeSound(void);
+	void makeSound(void) const;
 };
 
 #endif

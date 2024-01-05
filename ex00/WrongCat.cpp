@@ -19,7 +19,7 @@ WrongCat::~WrongCat(void) {
 	std::cout << "WrongCat Destructor called" << std::endl;
 }
 
-void	WrongCat::makeSound(void)
+void	WrongCat::makeSound(void) const
 {
 	std::cout << "냥냐냐냔냥" << std::endl;
 }

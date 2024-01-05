@@ -1,6 +1,6 @@
 #include "Animal.hpp"
 
-Animal::Animal(void) : type("") {
+Animal::Animal(void) : type() {
 	std::cout << "Animal Default constructor called" << std::endl;
 }
 
@@ -24,9 +24,9 @@ Animal::Animal(const std::string& _type) : type(_type) {
 	std::cout << "Animal String assignment operation called" << std::endl;
 }
 
-void	Animal::makeSound(void)
+void	Animal::makeSound(void) const
 {
 	std::cout << "(no sound)" << std::endl;
 }
 
-std::string	Animal::getType(void) { return (type); }
+std::string	Animal::getType(void) const { return (type); }
