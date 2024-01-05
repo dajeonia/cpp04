@@ -7,12 +7,6 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 #include "WrongDog.hpp"
-
-void	check_leaks(void)
-{
-	system("leaks -q a.out");
-}
-
 */
 
 int	main(void)
@@ -33,7 +27,6 @@ int	main(void)
 	delete j;
 
 	/*
-	atexit(check_leaks);
 	const WrongAnimal* meta = new WrongAnimal(); // Wrong Case
 	const WrongAnimal* i = new WrongDog();
 	const WrongAnimal* j = new WrongCat();
