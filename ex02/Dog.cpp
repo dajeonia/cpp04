@@ -5,20 +5,25 @@ Dog::Dog(void) : Animal("Dog") {
 	std::cout << "Dog Default constructor called" << std::endl;
 }
 
-Dog::~Dog(void) {
-	delete brain;
-	std::cout << "Dog Destructor called" << std::endl;
-}
-
 Dog::Dog(const Dog& d) : Animal(d) {
+	brain = new Brain(*d.brain);
 	std::cout << "Dog Copy constructor called" << std::endl;
 }
 
-Dog&	Dog::operator=(const Dog& d) {
+Dog&	Dog::operator=(const Dog& d)
+{
 	if (this != &d)
+	{
 		this->type = d.type;
+		*brain = *d.brain;
+	}
 	std::cout << "Dog Copy assignment operation called" << std::endl;
 	return (*this);
+}
+
+Dog::~Dog(void) {
+	delete brain;
+	std::cout << "Dog Destructor called" << std::endl;
 }
 
 void	Dog::makeSound(void) const

@@ -30,4 +30,23 @@ int	main(void)
 	std::cout << "============================================= 종료" << std::endl;
 
 	return (0);
+
+	/* 
+	Dog a;
+	a.think(5, "배고파");
+	Dog c;
+	c = a; // 복사 대입 연산자
+	a.think(5, "배불러");
+	a.speak(5);
+	c.speak(5);
+	*/
+
+	/* 
+	Dog a;
+	a.think(5, "배고파");
+	Dog c(a); // 복사 생성자
+	a.think(5, "배불러");
+	a.speak(5);
+	c.speak(5);
+	*/
 }
