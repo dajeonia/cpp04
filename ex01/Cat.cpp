@@ -28,7 +28,7 @@ Cat::~Cat(void) {
 
 void	Cat::makeSound(void) const
 {
-	std::cout << "냥냐냐냔냥" << std::endl;
+	std::cout << "Cat: " << "냥냐냐냔냥" << std::endl;
 }
 
 void	Cat::think(int index, std::string idea) const
@@ -39,5 +39,8 @@ void	Cat::think(int index, std::string idea) const
 
 void	Cat::speak(int index) const
 {
-	std::cout << "Cat: " << brain->getIdea(index) << std::endl;
+	if (brain->getIdea(index) == "")
+		std::cout << "Cat: " << "냥냐냐냔냥" << std::endl;
+	else
+		std::cout << "Cat: " << brain->getIdea(index) << std::endl;
 }

@@ -29,10 +29,11 @@ std::string Brain::getIdea(int index) const
 	if (0 <= index && index <= 99)
 		return (ideas[index]);
 	else
-		return ("(invalid idea)");
+		return ("");
 }
 
 void Brain::setIdea(int index, const std::string idea)
 {
-	ideas[index] = idea;
+	if (0 <= index && index <= 99)
+		ideas[index] = idea;
 }

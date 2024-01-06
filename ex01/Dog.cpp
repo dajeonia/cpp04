@@ -28,7 +28,7 @@ Dog::~Dog(void) {
 
 void	Dog::makeSound(void) const
 {
-	std::cout << "멍무엉멍멍" << std::endl;
+	std::cout << "Dog: " << "멍무엉멍멍" << std::endl;
 }
 
 void	Dog::think(int index, std::string idea) const
@@ -39,5 +39,8 @@ void	Dog::think(int index, std::string idea) const
 
 void	Dog::speak(int index) const
 {
-	std::cout << "Dog: " << brain->getIdea(index) << std::endl;
+	if (brain->getIdea(index) == "")
+		std::cout << "Dog: " << "멍무엉멍멍" << std::endl;
+	else
+		std::cout << "Dog: " << brain->getIdea(index) << std::endl;
 }
