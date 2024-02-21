@@ -25,8 +25,8 @@ int	main(void)
 
 	std::cout << "=========================================== 소멸자" << std::endl;
 
-	delete i;
 	delete j;
+	delete i;
 
 	std::cout << "============================================= 종료" << std::endl;
 
