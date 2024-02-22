@@ -2,14 +2,12 @@
 # define CHARACTER_HPP
 # include <string>
 # include "ICharacter.hpp"
-# include "List.hpp"
 
 class AMateria;
 
 class Character : public ICharacter {
 	const std::string name;
 	AMateria* slot[4];
-	List dropped;
 public:
 	Character();
 	Character(const std::string&);

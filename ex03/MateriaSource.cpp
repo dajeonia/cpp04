@@ -45,11 +45,11 @@ void	MateriaSource::learnMateria(AMateria* m)
 	for (int i=0; i!=4; ++i) {
 		if (!slot[i]) {
 			slot[i] = m;
-			std::cout << "\033[36m" << "[INFO ] learnMateria(): learned '" << m->getType() << "' at slot " << i << "\033[0m" << std::endl;
+			std::cout << "\033[32m" << "[INFO] learnMateria(): learned '" << m->getType() << "' at slot " << i << "\033[0m" << std::endl;
 			return ;
 		}
 	}
-	std::cout << "\033[36m" << "[INFO ] learnMateria(): there is not enough space" << "\033[0m"<< std::endl;
+	std::cout << "\033[33m" << "[ERROR] learnMateria(): there is not enough space" << "\033[0m" << std::endl;
 	delete m; // m은 new AMateria() 형식으로 들어온다. 
 }
 
@@ -58,11 +58,11 @@ AMateria*	MateriaSource::createMateria(const std::string& type)
 	std::cout << "[DEBUG] MateriaSource member function createMateria called" << std::endl;
 	for (int i=0; i!=4 && slot[i]; ++i) { /* finding */
 		if (slot[i]->getType() == type) {
-			std::cout << "\033[36m" << "[INFO ] createMateria(): '" << slot[i]->getType() << "' is created " << "\033[0m" << std::endl;
+			std::cout << "\033[32m" << "[INFO] createMateria(): '" << slot[i]->getType() << "' is created " << "\033[0m" << std::endl;
 			return (slot[i]->clone());
 		}
 	}
-	std::cout << "[INFO ] createMateria(): type doesn't exist" << std::endl;
+	std::cout << "\033[33m" << "[ERROR] createMateria(): type doesn't exist" << "\033[0m" << std::endl;
 	return (NULL);
 }
 

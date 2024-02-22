@@ -1,16 +1,16 @@
 #include "Character.hpp"
 #include "AMateria.hpp"
 
-Character::Character(void) : name(), slot(), dropped()
+Character::Character(void) : name(), slot()
 {
 	std::cout << "[DEBUG] Character default constructor called" << std::endl;
 }
-Character::Character(const std::string& _name) : name(_name), slot(), dropped()
+Character::Character(const std::string& _name) : name(_name), slot()
 {
 	std::cout << "[DEBUG] Character string constructor called" << std::endl;
 }
 
-Character::Character(const Character& c) : name(c.name), slot(), dropped()
+Character::Character(const Character& c) : name(c.name), slot()
 {
 	std::cout << "[DEBUG] Character copy constructor called" << std::endl;
 	for (int i=0; i!=4; ++i) { /* inordered */
@@ -40,7 +40,6 @@ Character&	Character::operator=(const Character& c)
 Character::~Character(void)
 {
 	std::cout << "[DEBUG] Character destructor called" << std::endl;
-	dropped.clear(); /* clear by dropped */
 	for (int i=0; i!=4; ++i) { /* inordered */
 		if (slot[i]) {
 			delete slot[i]; /* delete */
@@ -65,12 +64,11 @@ void	Character::equip(AMateria* m)
 	for (int i=0; i!=4; ++i) {
 		if (!slot[i]) {
 			slot[i] = m;
-			std::cout << "\033[36m" << "[INFO ] equip(): User '" << name << "' equiped '" << slot[i]->getType() << "' at slot " << i << "\033[0m" << std::endl;
+			std::cout << "\033[32m" << "[INFO] equip(): User '" << name << "' equiped '" << slot[i]->getType() << "' at slot " << i << "\033[0m" << std::endl;
 			return ;
 		}
 	}
-	std::cout << "\033[36m" << "[INFO ] equip: slot fulled" << "\033[0m" << std::endl;
-	dropped.add(m); /* drop on (diposing)dropped */
+	std::cout << "\033[33m" << "[ERROR] equip(): there is not enough space" << "\033[0m" << std::endl;
 }
 
 void	Character::unequip(int idx)
@@ -79,8 +77,7 @@ void	Character::unequip(int idx)
 	if (0 <= idx && idx < 4)
 	{
 		if (slot[idx]) {
-			std::cout << "\033[36m" << "[INFO ] unequip(): User '" << name << "' dropped '" << slot[idx]->getType() << "' at slot " << idx << "\033[0m" << std::endl;
-			dropped.add(slot[idx]); /* drop on (diposing)dropped */
+			std::cout << "\033[32m" << "[INFO] unequip(): User '" << name << "' dropped '" << slot[idx]->getType() << "' at slot " << idx << "\033[0m" << std::endl;
 			slot[idx] = NULL;
 		}
 	}
@@ -97,8 +94,7 @@ void 	Character::use(int idx, ICharacter& target)
 		std::cout << "\033[33m" << "[ERROR] unequip(): Invalid index" << "\033[0m" << std::endl;
 }
 
-
-// std::cout << "[INFO ] use: " << idx << "'th slot's item is activated" << std::endl;
+// std::cout << "[INFO] use: " << idx << "'th slot's item is activated" << std::endl;
 /*
 for (int i=0; i!=4; ++i)
 	std::cout << "[DEBUG] slot[" << i << "]: " << slot[i] << std::endl;

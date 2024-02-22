@@ -1,12 +1,10 @@
 NAME = a.out
 SOURCES = main.cpp \
-		  Node.cpp List.cpp \
 		  AMateria.cpp Ice.cpp Cure.cpp \
 		  Character.cpp \
 		  MateriaSource.cpp # IMateriaSource.cpp 
 
-INCLUDES = Node.hpp List.hpp \
-		   AMateria.hpp Ice.hpp Cure.cpp \
+INCLUDES = AMateria.hpp Ice.hpp Cure.cpp \
 		   IMateriaSource.hpp MateriaSource.hpp \
 		   ICharacter.hpp Character.hpp
 
