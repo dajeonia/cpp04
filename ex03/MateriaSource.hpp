@@ -1,13 +1,17 @@
-#include "IMateriaSource.hpp"
+#ifndef MATERIASOURCE_HPP
+# define MATERIASOURCE_HPP
+# include "IMateriaSource.hpp"
 
 class MateriaSource : public IMateriaSource {
-	AMateria* inventory[4];
+	AMateria* slot[4];
 public:
-	MateriaSource() { }
-	~MateriaSource()
+	MateriaSource();
+	MateriaSource(const MateriaSource&);
+	MateriaSource& operator=(const MateriaSource&);
+	~MateriaSource();
+
 	void learnMateria(AMateria*);
 	AMateria* createMateria(const std::string& type);
-private:
-	MateriaSource(const MateriaSource&) { }
-	MateriaSource& operator=(const MateriaSource&) { } // Error ...?
-}
+};
+
+#endif

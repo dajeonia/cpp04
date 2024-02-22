@@ -1,6 +1,14 @@
 NAME = a.out
-SOURCES = main.cpp 
-INCLUDES = 
+SOURCES = main.cpp \
+		  Node.cpp List.cpp \
+		  AMateria.cpp Ice.cpp Cure.cpp \
+		  Character.cpp \
+		  MateriaSource.cpp # IMateriaSource.cpp 
+
+INCLUDES = Node.hpp List.hpp \
+		   AMateria.hpp Ice.hpp Cure.cpp \
+		   IMateriaSource.hpp MateriaSource.hpp \
+		   ICharacter.hpp Character.hpp
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SOURCES:.cpp=.o))
 SRCS = $(addprefix $(SRC_DIR)/, $(SOURCES))

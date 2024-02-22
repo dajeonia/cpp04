@@ -1,56 +1,105 @@
 #include "Character.hpp"
+#include "AMateria.hpp"
 
-Character::Character(const std::string& _n) : name(_n), inventory()
+Character::Character(void) : name(), slot(), dropped()
 {
-	std::cout << "[DEBUG] Character std::string constructor called" << std::endl;
+	std::cout << "[DEBUG] Character default constructor called" << std::endl;
+}
+Character::Character(const std::string& _name) : name(_name), slot(), dropped()
+{
+	std::cout << "[DEBUG] Character string constructor called" << std::endl;
+}
+
+Character::Character(const Character& c) : name(c.name), slot(), dropped()
+{
+	std::cout << "[DEBUG] Character copy constructor called" << std::endl;
+	for (int i=0; i!=4; ++i) { /* inordered */
+		if (c.slot[i])
+			slot[i] = c.slot[i]->clone();
+	}
+}
+
+Character&	Character::operator=(const Character& c)
+{
+	std::cout << "[DEBUG] Character copy assignment operator called" << std::endl;
+	if (&c == this)
+		return (*this);
+	for (int i=0; i!=4; ++i) { /* delete */
+		if (slot[i]) {
+			delete slot[i];
+			slot[i] = NULL;
+		}
+	}
+	for (int i=0; i!=4; ++i) { /* deep(clone) copy */
+		if (c.slot[i])
+			slot[i] = c.slot[i]->clone();
+	}
+	return (*this);
 }
 
 Character::~Character(void)
 {
 	std::cout << "[DEBUG] Character destructor called" << std::endl;
+	dropped.clear(); /* clear by dropped */
+	for (int i=0; i!=4; ++i) { /* inordered */
+		if (slot[i]) {
+			delete slot[i]; /* delete */
+			slot[i] = NULL; /* treat a dangling pointer */
+		}
+	}
 }
 
 const std::string&	Character::getName(void) const
 {
-	std::cout << "[DEBUG] Character \"getName\" member function called" << std::endl;
+	// std::cout << "[DEBUG] Character getName member function called" << std::endl;
 	return (name);
 }
 
 void	Character::equip(AMateria* m)
 {
-	std::cout << "[DEBUG] Character \"equip\" member function called" << std::endl;
-	for (int i; i!=4; ++i) {
-		if (!inventory[i])
-			inventory[i] = m;
+	std::cout << "[DEBUG] Character equip member function called" << std::endl;
+	if (!m) {
+		std::cout << "\033[33m" << "[ERROR] equip(): Invalid item" << "\033[0m" << std::endl;
+		return ;
 	}
+	for (int i=0; i!=4; ++i) {
+		if (!slot[i]) {
+			slot[i] = m;
+			std::cout << "\033[36m" << "[INFO ] equip(): User '" << name << "' equiped '" << slot[i]->getType() << "' at slot " << i << "\033[0m" << std::endl;
+			return ;
+		}
+	}
+	std::cout << "\033[36m" << "[INFO ] equip: slot fulled" << "\033[0m" << std::endl;
+	dropped.add(m); /* drop on (diposing)dropped */
 }
 
 void	Character::unequip(int idx)
 {
-	std::cout << "[DEBUG] Character \"unequip\" member function called" << std::endl;
-	if (1 <= i && i <= 4)
+	std::cout << "[DEBUG] Character unequip member function called" << std::endl;
+	if (0 <= idx && idx < 4)
 	{
-		if (inventory[i - 1]) {
-			std::cout << "[INFO] \"unequip\": " << i << "'th slot's item is dropped" << std::endl;
-			inventory[i - 1] = NULL;
+		if (slot[idx]) {
+			std::cout << "\033[36m" << "[INFO ] unequip(): User '" << name << "' dropped '" << slot[idx]->getType() << "' at slot " << idx << "\033[0m" << std::endl;
+			dropped.add(slot[idx]); /* drop on (diposing)dropped */
+			slot[idx] = NULL;
 		}
 	}
 	else
-		std::cerr << "[ERROR] \"unequip\": Invalid index" << std::endl;
+		std::cout << "\033[33m" << "[ERROR] unequip(): Invalid index" << "\033[0m" << std::endl;
 }
 
 void 	Character::use(int idx, ICharacter& target)
 {
-	std::cout << "[DEBUG] Character \"use\" member function called" << std::endl;
-	if (1 <= i && i <= 4)
-	{
-		if (inventory[i - 1]) {
-			std::cout << "[INFO] \"use\": " << i << "'th slot's item is activated" << std::endl;
-			inventory[i - 1].use();
-		}
-		else
-			std::cout << "[INFO] \"use\": " << i << "'th slot's item is emptied" << std::endl;
-	}
+	std::cout << "[DEBUG] Character use member function called" << std::endl;
+	if (0 <= idx && idx < 4 && slot[idx])
+		slot[idx]->use(target);
 	else
-		std::cerr << "[ERROR] \"use\": Invalid index" << std::endl;
+		std::cout << "\033[33m" << "[ERROR] unequip(): Invalid index" << "\033[0m" << std::endl;
 }
+
+
+// std::cout << "[INFO ] use: " << idx << "'th slot's item is activated" << std::endl;
+/*
+for (int i=0; i!=4; ++i)
+	std::cout << "[DEBUG] slot[" << i << "]: " << slot[i] << std::endl;
+*/

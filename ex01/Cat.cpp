@@ -4,8 +4,7 @@ Cat::Cat(void) : Animal("Cat"), brain(new Brain()) {
 	std::cout << "Cat Default constructor called" << std::endl;
 }
 
-Cat::Cat(const Cat& d) : Animal(d) {
-	brain = new Brain(*d.brain);
+Cat::Cat(const Cat& d) : Animal(d), brain(new Brain(*d.brain)) {
 	std::cout << "Cat Copy constructor called" << std::endl;
 }
 

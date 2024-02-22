@@ -1,4 +1,5 @@
 #include "AMateria.hpp"
+#include "Character.hpp"
 
 AMateria::AMateria(void) : type()
 {
@@ -12,7 +13,9 @@ AMateria::AMateria(const AMateria& a) : type(a.type)
 
 AMateria&	AMateria::operator=(const AMateria& a)
 {
+	(void)a;
 	std::cout << "[DEBUG] AMateria copy assignment operator called" << std::endl;
+	return (*this);
 }
 
 AMateria::~AMateria(void)
@@ -22,16 +25,17 @@ AMateria::~AMateria(void)
 
 AMateria::AMateria(const std::string& _type) : type(_type)
 {
-	std::cout << "[DEBUG] AMateria type(std::string) constructor called" << std::endl;
+	std::cout << "[DEBUG] AMateria string constructor called" << std::endl;
 }
 
-const std::string&	getType(void) const
+const std::string&	AMateria::getType(void) const
 {
-	std::cout << "[DEBUG] AMateria getType member function called" << std::endl;
+	// std::cout << "[DEBUG] AMateria getType member function called" << std::endl;
 	return (type);
 }
 
-void	AMateria::use(ICharacter& ic) 
+void	AMateria::use(ICharacter& target) 
 {
 	std::cout << "[DEBUG] AMateria use member function called" << std::endl;
+	std::cout << "[INFO ] * Unknown item used to " << target.getName() << " *" << std::endl;
 }
