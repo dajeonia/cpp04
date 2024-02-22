@@ -91,7 +91,7 @@ void 	Character::use(int idx, ICharacter& target)
 	if (0 <= idx && idx < 4 && slot[idx])
 		slot[idx]->use(target);
 	else
-		std::cout << "\033[33m" << "[ERROR] unequip(): Invalid index" << "\033[0m" << std::endl;
+		std::cout << "\033[33m" << "[ERROR] use(): Invalid index" << "\033[0m" << std::endl;
 }
 
 // std::cout << "[INFO] use: " << idx << "'th slot's item is activated" << std::endl;
